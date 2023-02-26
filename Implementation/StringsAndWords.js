@@ -25,7 +25,7 @@ const findUniqueWords =  (pathToDocument) => {
         }
     })
 
-    console.log(finalWordsMap)
+    // console.log(finalWordsMap)
 
     return finalWordsMap.size
 }
