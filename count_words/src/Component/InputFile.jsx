@@ -49,7 +49,6 @@ const InputFile = () => {
       useEffect(() => {
         if(lines.length > 0){
             setIsRead(true)
-            console.log("is read: ", isRead)
         }
       },[lines])
 
