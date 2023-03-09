@@ -26,7 +26,7 @@ describe('MyComponent', () => {
         const readButton = screen.getByRole("readButton")
         readButton.click();
         setTimeout(() => {  console.log("World!"); }, 10000);
-        console.log(document.body.innerHTML);
+        // console.log(document.body.innerHTML);
         // const wordCount = await screen.getByText("Word Count for this file is: 4")
         // const fileContentHeading = await screen.getByText("Your File Content Is Printed Below")
         // const fileLines = ['hello','   how are ','\t you?']
