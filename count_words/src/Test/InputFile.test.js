@@ -1,6 +1,6 @@
 import React from 'react'
 import InputFile from '../Component/InputFile'
-import { render, screen, fireEvent ,act} from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom' // Import the jest-dom package
 
 describe('MyComponent', () => {
@@ -20,10 +20,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 0')
@@ -46,10 +46,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 4')
@@ -72,10 +72,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 4')
@@ -98,10 +98,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 4')
@@ -124,10 +124,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 0')
@@ -150,10 +150,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 6')
@@ -176,10 +176,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFile] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 0')
@@ -202,10 +202,10 @@ describe('MyComponent', () => {
     // Make sure test is clean
     expect(fileInputButton.files.length).toBe(0)
     // Simulate a user picking the file
-    await act(async ()=>{
-        await fireEvent.change(fileInputButton, { target: { files: [testFileJPEG] } })
-        // Click read button to render file contents and count unique words
-        readButton.click()
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFileJPEG] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
     })
 
     // wait for word count header to appear with appropriate unique word count

@@ -1,5 +1,5 @@
 # How to run
-- <u><bNote: you must have node.js and npm installed</b></u>
+- <u><b>Note: you must have node.js and npm installed</b></u>
     - I am using node v18.12.1
     - am using npm 8.19.2
     - You can use the docs here to help you download the above. https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
