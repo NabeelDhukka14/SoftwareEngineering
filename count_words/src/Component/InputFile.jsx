@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 
 const InputFile = () => {
 
-    let fileLines = []
-
     const [isRead, setIsRead] = useState(false)
     const [lines, setLines] = useState([])
     const [wordCount, setWordCount] = useState(0)
@@ -22,7 +20,6 @@ const InputFile = () => {
             return;
         }
 
-        console.log("input: ", userFile.files)
         const file = userFile.files[0];
         const fileReader = new FileReader();
         fileReader.readAsText(file);
