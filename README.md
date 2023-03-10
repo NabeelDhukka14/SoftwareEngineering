@@ -1,8 +1,12 @@
 # How to run
+- <u><b>Note: you must have node.js and npm installed</b></u>
+    - I am using node v18.12.1
+    - am using npm 8.19.2
+    - You can use the docs here to help you download the above. https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
-- navigate to the "count_words" directory
+- Once you've installed the above, navigate to the "count_words" directory
+
 - run command " npm i " 
-    - <b>Note:</b> I am using npm version 8.19.2
 
 - once all dependencies have been pulled in, you can use command "npm start" to launch the app. 
 
