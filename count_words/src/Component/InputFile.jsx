@@ -7,6 +7,7 @@ const InputFile = () => {
     const [isRead, setIsRead] = useState(false)
     const [lines, setLines] = useState([])
     const [wordCount, setWordCount] = useState(0)
+    const [allWords, setAllWords] = useState(new Map())
 
 
     function readFile(setLines, setWordCount) {
@@ -27,12 +28,14 @@ const InputFile = () => {
     
             let finalWords = words.filter(word => !(/^\s*$/.test(word))).map(word => {
                 let x = word.replace(/^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu, "")
+                // let x = word.replace(/[\p{P}\p{S}]+/gu, "")
                 return x
             })
 
             finalWords.forEach(word => {
+                if(word === ""){return}
                 let wordCount = finalWordsMap.get(word);
-                if(wordCount===undefined){
+                if(wordCount===undefined ){
                     finalWordsMap.set(word.toLowerCase(), 1)
                 }else{
                     finalWordsMap.set(word.toLowerCase(), wordCount+=1)
@@ -40,7 +43,7 @@ const InputFile = () => {
             })
             
             setWordCount(finalWordsMap.size);
-            // console.log(line);
+            setAllWords(finalWordsMap)
           }
         };
 
@@ -60,11 +63,10 @@ const InputFile = () => {
             <button role={"readButton"} onClick={()=>{readFile(setLines, setWordCount)}}>Read File</button>
             {isRead && <h2>Word Count for this file is: {wordCount}</h2>}
             {isRead && <h3>Your File Content Is Printed Below</h3>}
-            {isRead && lines.map((line,index) => {
-                return (
-                    <p key={index} >{line}</p>
-                )
-            })}
+            {isRead && Array.from(allWords).map(([key, value]) => (
+                    <h3 key={key}>{`${key}: ${value}`}</h3>
+                ))
+            }
         </>
     )
 
