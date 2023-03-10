@@ -177,7 +177,7 @@ describe('MyComponent', () => {
         expect(wordCountHeader).toBeInTheDocument()
     });   
 
-    it('should read file wiht no content as zero words', async () => {
+    it('should read file with no content as zero words', async () => {
 
         const component =  render(
             <InputFile/>
@@ -202,6 +202,32 @@ describe('MyComponent', () => {
         readButton.click();
         //wait for word count header to appear with appropriate unique word count
         const wordCountHeader = await screen.findByText("Word Count for this file is: 0")
+        expect(wordCountHeader).toBeInTheDocument()
+    });   
+
+    it('should Not read a file that is not .txt', async () => {
+
+        const component =  render(
+            <InputFile/>
+        )
+        
+        expect(screen.getByText("Select a .txt file for me to read")).toBeTruthy()
+
+        const readButton = screen.getByRole("readButton")
+
+        //FILE has no content in first param
+        const testImageFile = new File([], "test.jpeg", { type: "image/jpeg" });
+
+        const fileInputButton = screen.getByRole("fileSelector");
+        // Make sure test is clean
+        expect(fileInputButton.files.length).toBe(0);
+        // Simulate a user picking the file
+        fireEvent.change(fileInputButton, { target: { files: [testImageFile] } });
+
+        //Click read button to render file contents and count unique words
+        readButton.click();
+        //wait for word count header to appear with appropriate unique word count
+        const wordCountHeader = await screen.findByText("You Selected a \"jpeg\" file. Please select a .txt file")
         expect(wordCountHeader).toBeInTheDocument()
     });   
 });    
