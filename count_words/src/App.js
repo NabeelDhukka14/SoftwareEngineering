@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 import InputFile from './Component/InputFile'
 
-function App() {
+function App () {
   return (
-    <div className="App" style={{padding:"5%"}}>
+    <div className='App' style={ { padding: '5%' } }>
       <InputFile></InputFile>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
