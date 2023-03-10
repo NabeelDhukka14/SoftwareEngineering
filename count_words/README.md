@@ -1,6 +1,6 @@
 # How to run
 
-- navigate to the root of the "count_words" directory
+- navigate to the "count_words" directory
 - run command " npm i " 
     - <b>Note:</b> I am using npm version 8.19.2
 
