@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 const InputFile = () => {
   const [isRead, setIsRead] = useState(false)
   const [lines, setLines] = useState([])
+  let [charCount, setCharCount] = useState(0)
   const [wordCount, setWordCount] = useState(0)
   const [allWords, setAllWords] = useState(new Map())
   const [currFileType, setCurrFileType] = useState('')
@@ -25,6 +26,9 @@ const InputFile = () => {
       const fileLines = this.result.split('\n')
       setLines(fileLines)
       for (const line of fileLines) {
+        //  line without spaces
+        const noSpaceLine = line.replace(/\s+/g, '')
+        setCharCount(charCount += noSpaceLine.length)
         const words = line.replace(/\n/g, ' ').split(' ')
 
         const finalWords = words.filter(word => !(/^\s*$/.test(word))).map(word => {
@@ -59,11 +63,15 @@ const InputFile = () => {
             <input type='file' id='UserTxtFile' accept='.txt' role={'fileSelector'}/>
             <button role={'readButton'} onClick={() => { readFile(setLines, setWordCount) }}>Read File</button>
             {currFileType !== '' && <h3>You Selected a `&quot;`{ currFileType }`&quot;` file. Please select a .txt file</h3>}
+            {isRead && <hr></hr>}
+
             {isRead && <h2>Word Count for this file is: { wordCount }</h2>}
             {isRead && <h2>Line Count for this file is: { lines.length }</h2>}
-            {isRead && <h2>Character Count for this file is: { wordCount }</h2>}
+            {isRead && <h2>Character Count for this file is: { charCount }</h2>}
+            {isRead && <hr></hr>}
 
             {isRead && <h3>Your File Content Is Printed Below</h3>}
+
             {isRead && Array.from(allWords).map(([key, value]) => (
                 <h3 key={key}>{`${key}: ${value}`}</h3>
             ))
