@@ -1,5 +1,13 @@
 
 # Version 1.0.0
+
+## Initial Requirements (1.1.0)
+
+- Program needs to count how many lines are read from the file and present the count to the user
+- Program needs to determine how many characters are in each line read by the program, sum those counts, and display the over all character count of the file to the user
+- A character, does NOT NEED to be alphabetical. Punctuation, numbers, alphabet all count as characters. 
+- Whitespace does NOT count as a character
+
 ## Initial Requirements (1.0.0)
 
 - Program needs to propmt/ask the user to select a .txt file
@@ -8,6 +16,9 @@
 - Program needs to parse through the file contents, separating the document based on spaces, tabs,punctuation, and newline chars to extract "words"
 - Program needs to display to the user the count of unique words found and what the words are
 - Program needs to display an error, if the proper file type isn't selected, as this could affect the reading of the file. 
+
+
+
 
 ## Test Cases
 - test cases are described in the "/src/Test/InputFile.test.js" file. 
