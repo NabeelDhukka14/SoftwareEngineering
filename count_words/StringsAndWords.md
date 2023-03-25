@@ -7,6 +7,7 @@
 - Program needs to determine how many characters are in each line read by the program, sum those counts, and display the over all character count of the file to the user
 - A character, does NOT NEED to be alphabetical. Punctuation, numbers, alphabet all count as characters. 
 - Whitespace does NOT count as a character
+- If an Empty file is passed to the program to read, show a message to the user indicating we dont read empty files as there will be no words, chars, or lines to read.
 
 ## Initial Requirements (1.0.0)
 

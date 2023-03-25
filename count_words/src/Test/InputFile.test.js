@@ -4,7 +4,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom' // Import the jest-dom package
 
 describe('MyComponent', () => {
-  it('should read empty input file and show zero unque words', async () => {
+  it('should read empty input file and show empty file error message', async () => {
     render(
             <InputFile/>
     )
@@ -26,13 +26,14 @@ describe('MyComponent', () => {
       readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
-    const wordCountHeader = await screen.findByText('Word Count for this file is: 0')
-    expect(wordCountHeader).toBeInTheDocument()
+    const emptyFileHeader = await screen.findByText('This file is empty, so it will not be read. Please select a file with data')
+
+    expect(emptyFileHeader).toBeInTheDocument()
   })
 
   it('should read a file with repeat word, and uniquely count all words', async () => {
     render(
-                <InputFile/>
+      <InputFile/>
     )
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
@@ -53,7 +54,12 @@ describe('MyComponent', () => {
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 4')
+    const lineCountHeader = await screen.findByText('Line Count for this file is: 3')
+    const charCountHeader = await screen.findByText('Character Count for this file is: 20')
+
     expect(wordCountHeader).toBeInTheDocument()
+    expect(lineCountHeader).toBeInTheDocument()
+    expect(charCountHeader).toBeInTheDocument()
   })
 
   it('should read input file, and count same words with different cases as the same word', async () => {
@@ -79,7 +85,12 @@ describe('MyComponent', () => {
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 4')
+    const lineCountHeader = await screen.findByText('Line Count for this file is: 3')
+    const charCountHeader = await screen.findByText('Character Count for this file is: 20')
+
     expect(wordCountHeader).toBeInTheDocument()
+    expect(lineCountHeader).toBeInTheDocument()
+    expect(charCountHeader).toBeInTheDocument()
   })
 
   it('should read input file, and count same words with different cases as the same word even if single word has mixed case', async () => {
@@ -105,10 +116,15 @@ describe('MyComponent', () => {
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 4')
+    const lineCountHeader = await screen.findByText('Line Count for this file is: 3')
+    const charCountHeader = await screen.findByText('Character Count for this file is: 20')
+
     expect(wordCountHeader).toBeInTheDocument()
+    expect(lineCountHeader).toBeInTheDocument()
+    expect(charCountHeader).toBeInTheDocument()
   })
 
-  it('should read input file with only whitespace. zero words', async () => {
+  it('should read input file with only whitespace, including new lines', async () => {
     render(
             <InputFile/>
     )
@@ -131,7 +147,12 @@ describe('MyComponent', () => {
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 0')
+    const lineCountHeader = await screen.findByText('Line Count for this file is: 4')
+    const charCountHeader = await screen.findByText('Character Count for this file is: 0')
+
     expect(wordCountHeader).toBeInTheDocument()
+    expect(lineCountHeader).toBeInTheDocument()
+    expect(charCountHeader).toBeInTheDocument()
   })
 
   it('should read input file with words containing punctuation within the word as unique word', async () => {
@@ -157,10 +178,15 @@ describe('MyComponent', () => {
     })
     // wait for word count header to appear with appropriate unique word count
     const wordCountHeader = await screen.findByText('Word Count for this file is: 6')
+    const lineCountHeader = await screen.findByText('Line Count for this file is: 1')
+    const charCountHeader = await screen.findByText('Character Count for this file is: 28')
+
     expect(wordCountHeader).toBeInTheDocument()
+    expect(lineCountHeader).toBeInTheDocument()
+    expect(charCountHeader).toBeInTheDocument()
   })
 
-  it('should read file with no content as zero words', async () => {
+  it('should read file with no content and show the user a message indicating they need to select a non-empty file', async () => {
     render(
             <InputFile/>
     )
@@ -182,8 +208,9 @@ describe('MyComponent', () => {
       readButton.click()
     })
     // wait for word count header to appear with appropriate unique word count
-    const wordCountHeader = await screen.findByText('Word Count for this file is: 0')
-    expect(wordCountHeader).toBeInTheDocument()
+    const emptyFileHeader = await screen.findByText('This file is empty, so it will not be read. Please select a file with data')
+
+    expect(emptyFileHeader).toBeInTheDocument()
   })
 
   it('should Not read a file that is not .txt', async () => {
@@ -209,7 +236,8 @@ describe('MyComponent', () => {
     })
 
     // wait for word count header to appear with appropriate unique word count
-    const wordCountHeader = await screen.findByText('You Selected a "jpeg" file. Please select a .txt file')
-    expect(wordCountHeader).toBeInTheDocument()
+   
+    const incorrectFileTypeHeader = await screen.findByText('You Selected a "jpeg“ file. Please select a .txt file')
+    expect(incorrectFileTypeHeader).toBeInTheDocument()
   })
 })
