@@ -33,6 +33,7 @@ const InputFile = () => {
       } else {
         setIsEmptyFile(true)
       }
+      console.log(fileLines)
       setLines(fileLines)
       for (const line of fileLines) {
         // reset Char count, so it doesn't keep char count of previous file
@@ -48,7 +49,7 @@ const InputFile = () => {
 
         finalWords.forEach(word => {
           if (word === '') { return }
-          let wordCount = finalWordsMap.get(word)
+          let wordCount = finalWordsMap.get(word.toLowerCase())
           if (wordCount === undefined) {
             finalWordsMap.set(word.toLowerCase(), 1)
           } else {
