@@ -1,12 +1,13 @@
 
 # Version 1.0.0
 
-## Initial Requirements (1.1.0)
+## Checkpoint 2 Requirements (1.1.0)
 
-- Program needs to count how many lines are read from the file and present the count to the user
+- Program needs to count how many lines are read from the file and present the count to the user. Lines are determined by number of newline breaks. so file with only whitespace but 2 newline breaks will be 2 lines, 0 words, 0 chars.
 - Program needs to determine how many characters are in each line read by the program, sum those counts, and display the over all character count of the file to the user
 - A character, does NOT NEED to be alphabetical. Punctuation, numbers, alphabet all count as characters. 
 - Whitespace does NOT count as a character
+- All punctuation is not a word. all numbers can be words. all alpha can be words. any puctuation wrapped within numbers and alpha will be counted as a word.
 - If an Empty file is passed to the program to read, show a message to the user indicating we dont read empty files as there will be no words, chars, or lines to read.
 
 ## Initial Requirements (1.0.0)

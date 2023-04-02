@@ -44,6 +44,7 @@ const InputFile = () => {
 
         const finalWords = words.filter(word => !(/^\s*$/.test(word))).map(word => {
           const x = word.replace(/^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu, '')
+          
           return x
         })
 

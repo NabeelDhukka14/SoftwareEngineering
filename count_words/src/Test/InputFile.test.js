@@ -240,4 +240,36 @@ describe('MyComponent', () => {
     const incorrectFileTypeHeader = await screen.findByText('You Selected a "jpeg“ file. Please select a .txt file')
     expect(incorrectFileTypeHeader).toBeInTheDocument()
   })
+
+  it('should count Punctuation, numbers, alphabet all as characters. ', async () => {
+    render(
+            <InputFile/>
+    )
+
+    expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
+
+    const readButton = screen.getByRole('readButton')
+
+    // FILE is created as Jpeg
+    const testFileJPEG = new File(['hi 12 1h1 ^h^  h.t 1\'1 5;j .,'], 'test.txt', { type: 'text/plain' })
+
+    const fileInputButton = screen.getByRole('fileSelector')
+    // Make sure test is clean
+    expect(fileInputButton.files.length).toBe(0)
+    // Simulate a user picking the file
+    await act(async () => {
+      await fireEvent.change(fileInputButton, { target: { files: [testFileJPEG] } })
+      // Click read button to render file contents and count unique words
+      readButton.click()
+    })
+
+    // wait for word count header to appear with appropriate unique word count
+    const wordCountHeader = await screen.findByText('Word Count for this file is: 7')
+    const lineCountHeader = await screen.findByText('Line Count for this file is: 1')
+    const charCountHeader = await screen.findByText('Character Count for this file is: 21')
+
+    expect(wordCountHeader).toBeInTheDocument()
+    expect(lineCountHeader).toBeInTheDocument()
+    expect(charCountHeader).toBeInTheDocument()
+  })
 })
