@@ -23,19 +23,9 @@ app.post('/updateFile', (req, res) => {
     const {fileName, targetWord, replacementWord} = req.body
     const file = "./src/Test/InputFiles/"+fileName;
 
-    fs.readFile(file, 'utf8', function (err, data) {
-        if (err) {
-          return console.log(err)
-        }
-  
-        const result = data.replace(targetWord, replacementWord)
-  
-        fs.writeFile(file, result, 'utf8', function (err) {
-          if (err) return console.log(err)
-        })
-      })
+    replacement(file, targetWord, replacementWord)
 
-      res.send("Successfully replaced file")
+    res.send("Successfully replaced file")
 });
 
 // Start the server and listen for incoming requests
@@ -44,6 +34,17 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-const replacement = () => {
+export const replacement = (file, targetWord, replacementWord) => {
+  fs.readFile(file, 'utf8', function (err, data) {
+    if (err) {
+      return console.log(err)
+    }
+
+    const result = data.replace(targetWord, replacementWord)
+
+    fs.writeFile(file, result, 'utf8', function (err) {
+      if (err) return console.log(err)
+    })
+  })
 
 }
