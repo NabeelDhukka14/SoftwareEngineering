@@ -1,7 +1,6 @@
-const fs = require('fs')
 var cors = require('cors')
 const bodyParser = require('body-parser');
-
+const replacementModule = require('./replacement');
 // Import required modules
 const express = require('express');
 
@@ -17,15 +16,23 @@ app.get('/', (req, res) => {
 });
 
 // Define an endpoint for HTTP POST request
-app.post('/updateFile', (req, res) => {
+app.post('/updateFile',  async (req, res) => {
 
     console.log("req: ", req.body)
     const {fileName, targetWord, replacementWord} = req.body
     const file = "./src/Test/InputFiles/"+fileName;
 
-    replacement(file, targetWord, replacementWord)
+    let statusCode = "TARGET_NOT_FOUND"
+    try{
+      statusCode = await replacementModule.replacement(file, targetWord, replacementWord);
+    }catch(err){
+      console.log("ERR: ",err)
+      statusCode = "ERROR"
+    }
 
-    res.send("Successfully replaced file")
+    console.log("status: ", statusCode)
+    res.send({status: statusCode})
+
 });
 
 // Start the server and listen for incoming requests
@@ -34,17 +41,30 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-export const replacement = (file, targetWord, replacementWord) => {
-  fs.readFile(file, 'utf8', function (err, data) {
-    if (err) {
-      return console.log(err)
-    }
 
-    const result = data.replace(targetWord, replacementWord)
 
-    fs.writeFile(file, result, 'utf8', function (err) {
-      if (err) return console.log(err)
-    })
-  })
+// const replacement = async(file, targetWord, replacementWord) => {
+//   let found = false;
+//   const data = await asyncReadFile(file)
 
-}
+  
+//   const regex = new RegExp("\\b" + targetWord + "\\b", "gi");
+  
+//   const result = data.replace(regex, replacementWord)
+
+//   console.log("result: ", result)
+//   console.log("data: ", data)
+//   console.log("data !== result: ", data !== result)
+
+//   if(result !== data){
+//     await asyncWriteFile(file, result)
+//     found = true;
+//   }
+
+//   console.log("returning: ", found)
+//   const status = found ? "SUCCESS" : "TARGET_NOT_FOUND";
+//   return status;
+// }
+
+
+// module.exports = { replacement };

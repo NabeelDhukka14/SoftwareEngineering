@@ -2,6 +2,7 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 
 export const callReplaceAPI = (reqBody) => {
+  console.log('SENDING: ', reqBody)
   // eslint-disable-next-line
   return axios.post('http://localhost:8080/updateFile', reqBody,  { mode: 'no-cors' }).then(res => {
     console.log('API response is: ', res)
