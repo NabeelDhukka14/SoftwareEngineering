@@ -405,12 +405,14 @@ describe('MyComponent', () => {
   it('should throw error if bad file directory', async () => {
 
     try{
-      const testFile = './src/Test/InputFiles/replace_text.txt'
+      const testFile = './replace_text.txt'
       const readResultBefore = await replacementModule.asyncReadFile(testFile)
-      //No error thrown for negative test scenario so fail
-      expect(readResultBefore).toBeFalsey();
     }catch(err){
-      expect(err).toBeTruthy()
+      console.log(err.message);
+      expect(err.message).toBe("ENOENT: no such file or directory, open './replace_text.txt'")
+      return
     }
+     //No error thrown for negative test scenario so fail
+     expect(readResultBefore).toBe(false)
   })
 })
