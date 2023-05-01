@@ -16,6 +16,14 @@
 
 - To run code quality analysis use command "npm run lint" . empty response means no errors. 
 
+- NOTE:// To use word replacement feature you must start local express server. 
+    - navigate to the "count_words" directory
+    - make sure you have done an "npm i" , so you grab all the express dependencies. 
+    - run "node express.js" (express.js is in the root directory, do not move the file)
+    - You should see a message stating "Server is running on port 8080", to be assured that the server is up and running. 
+    - You can now proceed to your browser to use the word replace feature from the UI.
+    
+     
 # Git Repo Link
 https://github.com/NabeelDhukka14/SoftwareEngineering
 

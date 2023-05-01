@@ -382,8 +382,4 @@ it('should not replace word on partial match', async () => {
     expect(readResultAfter === 'cd cd ef').toBeTruthy()
 
   })
-
-
-
-
 })

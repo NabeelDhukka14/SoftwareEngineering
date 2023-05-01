@@ -50,7 +50,6 @@ const InputFile = (props) => {
     fileReader.readAsText(file)
 
     fileReader.onload = function () {
-
       let fileLines = []
       if (this.result.length > 0) {
         fileLines = this.result.split('\n')
@@ -86,7 +85,6 @@ const InputFile = (props) => {
         setAllWords(finalWordsMap)
       }
     }
-
   }
 
   const onTargetChange = (event) => {
@@ -194,13 +192,13 @@ const InputFile = (props) => {
                 {wordReplaceResponse.isSuccess && (
                   <>
                     <hr></hr>
-                    {wordReplaceResponse?.data?.data?.status === 'TARGET_NOT_FOUND'
-                      ? (<>
+                    {wordReplaceResponse?.data?.data?.status === 'ERROR' && (<h1>Make sure your chosen file is in the ./src/Test/InputFiles/ directory</h1>)}
+                    {wordReplaceResponse?.data?.data?.status === 'TARGET_NOT_FOUND' && (<>
                       <h1>
                         Could not find target word to replace. Please enter a new target word and new replacement word.
                       </h1>
-                    </>)
-                      : (<>
+                    </>)}
+                    {wordReplaceResponse?.data?.data?.status === 'SUCCESS' && (<>
                         <h1>Successfully replaced words in the selected file </h1>
                     </>)
                     }
