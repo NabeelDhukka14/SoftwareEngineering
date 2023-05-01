@@ -376,4 +376,41 @@ describe('MyComponent', () => {
     expect(readResultBefore !== readResultAfter).toBeTruthy()
     expect(readResultAfter === 'cd cd ef').toBeTruthy()
   })
+
+  it('should replace word with punctualtion on full match and change it back', async () => {
+    const testFile = './src/Test/InputFiles/replace_text.txt'
+    const readResultBefore = await replacementModule.asyncReadFile(testFile)
+    const result = await replacementModule.replacement(testFile, 'ab', 'lol\'ed')
+    // full target was found so it will be replaced in the file, with SUCCESS status
+    expect(result).toBe('SUCCESS')
+
+    const readResultAfter = await replacementModule.asyncReadFile(testFile)
+    expect(readResultBefore !== readResultAfter).toBeTruthy()
+    //validate file was updated to include punctuation string
+    expect(readResultAfter === 'lol\'ed cd ef').toBeTruthy()
+
+    //update back to original 
+    let resultOrigScenario = await replacementModule.replacement(testFile,'lol\'ed',  'ab')
+    expect(resultOrigScenario).toBe('SUCCESS')
+    const resultOrigScenarioRead = await replacementModule.asyncReadFile(testFile)
+    expect(resultOrigScenarioRead === 'ab cd ef').toBeTruthy()
+
+    //validate file was updated to include empty string
+    let emptyreplace = await replacementModule.replacement(testFile,'ab',  '')
+    const emptyReplaceRead = await replacementModule.asyncReadFile(testFile)
+    expect(emptyreplace).toBe('SUCCESS')
+    expect(emptyReplaceRead === ' cd ef').toBeTruthy()
+  })
+
+  it('should throw error if bad file directory', async () => {
+
+    try{
+      const testFile = './src/Test/InputFiles/replace_text.txt'
+      const readResultBefore = await replacementModule.asyncReadFile(testFile)
+      //No error thrown for negative test scenario so fail
+      expect(readResultBefore).toBeFalsey();
+    }catch(err){
+      expect(err).toBeTruthy()
+    }
+  })
 })

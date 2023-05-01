@@ -15,6 +15,7 @@ const InputFile = (props) => {
   const [features, setFeatures] = useState({ read: false, replace: false })
   const [canCallWordReplaceAPI, setCanCallWordReplaceAPI] = useState(false)
   const [fileName, setFileName] = useState('')
+  // eslint-disable-next-line
   const wordReplaceResponse = useReplaceAPI(canCallWordReplaceAPI, { fileName: fileName, targetWord: targetWord, replacementWord: replacementWord })
 
   useEffect(() => {
