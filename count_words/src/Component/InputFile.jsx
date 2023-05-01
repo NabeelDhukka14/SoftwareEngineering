@@ -19,12 +19,15 @@ const InputFile = () => {
   const wordReplaceResponse = useReplaceAPI(canCallWordReplaceAPI, { fileName: fileName, targetWord: targetWord, replacementWord: replacementWord })
 
   // console.log('word res: ', wordReplaceResponse)
-  function readFile (setLines, setWordCount) {
+  async function readFile (setLines, setWordCount) {
     setCurrFileType('')
     const finalWordsMap = new Map()
     let fileCharCount = 0
     const userFile = features.read ? document.getElementById('UserTxtFile') : document.getElementById('UserTxtFileForReplace')
+    console.log('USER FILE: ', userFile)
     const fileType = userFile.files[0]?.name.split('.').slice(-1)[0]
+    console.log('FILETYPE: ', fileType)
+
     if (fileType === undefined) {
       return
     }
@@ -32,11 +35,17 @@ const InputFile = () => {
       setCurrFileType(fileType)
       return
     }
+    console.log('CHECKPOINT 1')
 
     const file = userFile.files[0]
+    console.log('CHECKPOINT 2: ', file)
     const fileReader = new FileReader()
     fileReader.readAsText(file)
+    console.log('CHECKPOINT 3')
+
     fileReader.onload = function () {
+      console.log('Begin file reader onLoad: ')
+
       let fileLines = []
       if (this.result.length > 0) {
         fileLines = this.result.split('\n')
@@ -45,6 +54,8 @@ const InputFile = () => {
       }
       console.log(fileLines)
       setLines(fileLines)
+      console.log('Before lines read: ')
+
       for (const line of fileLines) {
         // reset Char count, so it doesn't keep char count of previous file
         //  line without spaces
@@ -56,6 +67,7 @@ const InputFile = () => {
           const x = word.replace(/^[\p{P}\p{S}]+|[\p{P}\p{S}]+$/gu, '')
           return x
         })
+        console.log('Before finalwords: ')
 
         finalWords.forEach(word => {
           if (word === '') { return }
@@ -69,8 +81,11 @@ const InputFile = () => {
         setCharCount(fileCharCount)
         setWordCount(finalWordsMap.size)
         setAllWords(finalWordsMap)
+        console.log('finished reading')
       }
     }
+
+    console.log('CHECKPOINT 4')
   }
 
   const onTargetChange = (event) => {
@@ -109,7 +124,7 @@ const InputFile = () => {
   useEffect(() => {
     if (wordReplaceResponse.isSuccess) {
       setCanCallWordReplaceAPI(false)
-      readFile(setLines, setWordCount)
+      // readFile(setLines, setWordCount)
     }
   }, [wordReplaceResponse])
 
@@ -119,12 +134,22 @@ const InputFile = () => {
     }
   }, [lines])
 
+  const resetState = () => {
+    setIsRead(false)
+    setLines([])
+    setCharCount(0)
+    setWordCount(0)
+    setAllWords(new Map())
+  }
+
   const handleReadBtn = () => {
     setFeatures({ read: true, replace: false })
+    resetState()
   }
 
   const handleReplaceBtn = () => {
     setFeatures({ read: false, replace: true })
+    resetState()
   }
 
   return (
@@ -166,7 +191,7 @@ const InputFile = () => {
             )}
             {features.replace && (
               <>
-                <h1>Select a .txt file and enter a word for me to replace in the .txt file.</h1>
+                <h1>Select a .txt file from the directory &quot;./src/Test/InputFiles/&ldquo; and enter a word for me to replace in the .txt file.</h1>
                 <input className='userInput' onChange={onTargetChange} type='text' placeholder="Enter target word you want to replace"/>
                 <input className='userInput' onChange={onReplaceWordChange} type='text' placeholder="Enter word that should replace the target word"/>
 
@@ -179,14 +204,16 @@ const InputFile = () => {
                 {wordReplaceResponse.isSuccess && (
                   <>
                     <hr></hr>
-                    <h2>Word Count for this file is: { wordCount }</h2>
-                    <h2>Line Count for this file is: { lines.length }</h2>
-                    <h2>Character Count for this file is: { charCount }</h2>
-                    <hr></hr>
-                    <h3>Your NEW File Content After Word Replacement Is Printed Below</h3>
-                    {Array.from(allWords).map(([key, value]) => (
-                    <h3 key={key}>{`${key}: ${value}`}</h3>
-                    ))}
+                    {wordReplaceResponse?.data?.data.status === 'TARGET_NOT_FOUND'
+                      ? (<>
+                      <h1>
+                        Could not find target word to replace. Please enter a new target word and new replacement word.
+                      </h1>
+                    </>)
+                      : (<>
+                        <h1>Successfully replaced words in the selected file </h1>
+                    </>)
+                    }
                   </>
                 )}
               </>
