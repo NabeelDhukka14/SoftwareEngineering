@@ -362,7 +362,7 @@ it('should not replace word on partial match', async () => {
     const testFile = './src/Test/InputFiles/replace_text.txt'
     const readResultBefore = await replacementModule.asyncReadFile(testFile)
     const result = await replacementModule.replacement(testFile, 'a','b');
-    //No full target was found so nothing will be replaced
+    //No full target was found so nothing will be replaced, so return TARGET_NOT_FOUND status
     expect(result).toBe("TARGET_NOT_FOUND");
 
     const readResultAfter = await replacementModule.asyncReadFile(testFile)
@@ -374,7 +374,7 @@ it('should not replace word on partial match', async () => {
     const testFile = './src/Test/InputFiles/replace_text.txt'
     const readResultBefore = await replacementModule.asyncReadFile(testFile)
     const result = await replacementModule.replacement(testFile, 'ab','cd');
-    //full target was found so it will be replaced in the file
+    //full target was found so it will be replaced in the file, with SUCCESS status
     expect(result).toBe("SUCCESS");
 
     const readResultAfter = await replacementModule.asyncReadFile(testFile)
@@ -384,6 +384,6 @@ it('should not replace word on partial match', async () => {
   })
 
 
-  
+
 
 })

@@ -4,6 +4,7 @@
 - User needs to be able to specify what word to replace AND what word to replace it with
 - Word replacement request needs to be able to update any file from within the "./src/Test/InputFiles/" directory
 - Word replacement should only occur on full match, not partial. “ab cd ef”, replace “a” with “b” will result in no change, while replace “ab” with “cd” will result in “cd cd ef”. 
+- backend replacement function should return status on if replacement could be done or not.
 
 ## Checkpoint 2 Requirements (1.1.0)
 
