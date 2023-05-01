@@ -1,7 +1,6 @@
 import React from 'react'
 import InputFile from './Component/InputFile'
 import { QueryClient, QueryClientProvider } from 'react-query'
-
 const queryClient = new QueryClient()
 
 function App () {
