@@ -1,5 +1,10 @@
 
 # Version 1.0.0
+## Checkpoint 3 Requirements (1.2.0)
+- User needs to be able to select if they want to read a file, or replace words within a file
+- User needs to be able to specify what word to replace AND what word to replace it with
+- Word replacement request needs to be able to update any file from within the "./src/Test/InputFiles/" directory
+- Word replacement should only occur on full match, not partial. “ab cd ef”, replace “a” with “b” will result in no change, while replace “ab” with “cd” will result in “cd cd ef”. 
 
 ## Checkpoint 2 Requirements (1.1.0)
 

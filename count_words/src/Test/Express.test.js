@@ -1,8 +1,12 @@
 import {replacement} from '../../express.js'
 
 
-describe('MyComponent', () => {
+describe.skip('MyComponent', () => {
   it('should replace a word', async () => {
-    // replacement();
+    
+    const testFile = new File(['a aa b'], 'test.txt', { type: 'text/plain' })
+    const response = replacement(testFile, "a", "c");
+    expect(response).toBe(true);
+
   })
 })

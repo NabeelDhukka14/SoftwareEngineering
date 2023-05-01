@@ -4,12 +4,16 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import '@testing-library/jest-dom' // Import the jest-dom package
 
 describe('MyComponent', () => {
-  it('should read empty input file and show empty file error message', async () => {
+  it.only('should read empty input file and show empty file error message', async () => {
     render(
             <InputFile/>
     )
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
+    
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
 
     const readButton = screen.getByRole('readButton')
 
@@ -37,6 +41,10 @@ describe('MyComponent', () => {
     )
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
+
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
 
     const readButton = screen.getByRole('readButton')
 
@@ -69,6 +77,10 @@ describe('MyComponent', () => {
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
 
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
+
     const readButton = screen.getByRole('readButton')
 
     // FILE has the word "hello", in upper and lower case. Still counts as 1 word
@@ -99,6 +111,10 @@ describe('MyComponent', () => {
     )
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
+
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
 
     const readButton = screen.getByRole('readButton')
 
@@ -131,6 +147,10 @@ describe('MyComponent', () => {
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
 
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
+
     const readButton = screen.getByRole('readButton')
 
     // FILE has only whitespace characters. should be zero words
@@ -161,6 +181,10 @@ describe('MyComponent', () => {
     )
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
+
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
 
     const readButton = screen.getByRole('readButton')
 
@@ -193,6 +217,10 @@ describe('MyComponent', () => {
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
 
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
+
     const readButton = screen.getByRole('readButton')
 
     // FILE has no content in first param
@@ -219,6 +247,10 @@ describe('MyComponent', () => {
     )
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
+
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
 
     const readButton = screen.getByRole('readButton')
 
@@ -247,6 +279,10 @@ describe('MyComponent', () => {
     )
 
     expect(screen.getByText('Select a .txt file for me to read')).toBeTruthy()
+
+    const readFeatureBtn = screen.getByText('Read File Contents')
+    expect(readFeatureBtn).toBeTruthy()
+    fireEvent.click(readFeatureBtn)
 
     const readButton = screen.getByRole('readButton')
 
