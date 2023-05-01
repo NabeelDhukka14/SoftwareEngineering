@@ -23,7 +23,8 @@
     - You should see a message stating "Server is running on port 8080", to be assured that the server is up and running. 
     - You can now proceed to your browser to use the word replace feature from the UI.
     
-     
+- If you have any issues compiling, you may want to try deleting the "package-lock.json" file and "node_modules" folder, and redo the "npm i" command
+
 # Git Repo Link
 https://github.com/NabeelDhukka14/SoftwareEngineering
 
